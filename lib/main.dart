@@ -193,17 +193,32 @@ class _HomePageState extends State<HomePage> {
 
   void _showDialog(String winner) {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Colors.grey[300],
           title: Text('Winner is : $winner'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  _clearBoard();
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "Play Again!",
+                  style: TextStyle(color: Colors.grey[900]),
+                ))
+          ],
         );
       },
     );
-    if(winner=='o'){
-
-    }else if(winner=='x'){
-
+    if (winner == 'o') {
+      ohScore += 1;
+    } else if (winner == 'x') {
+      exScore += 1;
     }
   }
+
+  void _clearBoard(){}
 }
