@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
@@ -24,6 +24,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  static const myTextStyle = TextStyle(fontSize: 25, color: Colors.white);
+
   bool ohTurn = true;
   List<String> displayExOh = [
     '',
@@ -37,37 +39,84 @@ class _HomePageState extends State<HomePage> {
     '',
   ];
 
+  int ohScore = 0;
+  int exScore = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
       backgroundColor: Colors.grey[800],
-      body: GridView.builder(
-        itemCount: 9,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-        ),
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              _tapped(index);
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey[700]!,
-                ),
+      body: Column(
+        children: [
+          Expanded(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Player O",
+                    style: myTextStyle,
+                  ),
+                  Text(
+                    ohScore.toString(),
+                    style: myTextStyle,
+                  ),
+                ],
               ),
-              child: Center(
-                child: Text(
-                  displayExOh[index],
-                  //index.toString(),
-                  style: const TextStyle(color: Colors.white, fontSize: 50),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Player X",
+                    style: myTextStyle,
+                  ),
+                  Text(
+                    exScore.toString(),
+                    style: myTextStyle,
+                  ),
+                ],
+              ),
+            ],
+          )),
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                itemCount: 9,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
                 ),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      _tapped(index);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey[700]!,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          displayExOh[index],
+                          //index.toString(),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 50),
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
-          );
-        },
+          ),
+          Expanded(child: Container())
+        ],
       ),
     ));
   }
@@ -143,10 +192,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showDialog(String winner) {
-    showDialog(context: context, builder: (context) {
-      return AlertDialog(
-        title: Text('Winner is : $winner'),
-      );
-    },);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Winner is : $winner'),
+        );
+      },
+    );
+    if(winner=='o'){
+
+    }else if(winner=='x'){
+
+    }
   }
 }
