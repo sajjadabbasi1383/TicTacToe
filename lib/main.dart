@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   static const myTextStyle = TextStyle(fontSize: 25, color: Colors.white);
 
   bool ohTurn = true;
-  bool finish=false;
+  bool winner = false;
   List<String> displayExOh = [
     '',
     '',
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
 
   int ohScore = 0;
   int exScore = 0;
-  int filledBoxes=0;
+  int filledBoxes = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -125,12 +125,12 @@ class _HomePageState extends State<HomePage> {
 
   void _tapped(int index) {
     setState(() {
-      if (ohTurn&&displayExOh[index]=='') {
+      if (ohTurn && displayExOh[index] == '') {
         displayExOh[index] = 'o';
-        filledBoxes+=1;
-      } else if(!ohTurn&&displayExOh[index]=='') {
+        filledBoxes += 1;
+      } else if (!ohTurn && displayExOh[index] == '') {
         displayExOh[index] = 'x';
-        filledBoxes+=1;
+        filledBoxes += 1;
       }
       ohTurn = !ohTurn;
       _checkWinner();
@@ -142,7 +142,9 @@ class _HomePageState extends State<HomePage> {
     if (displayExOh[0] == displayExOh[1] &&
         displayExOh[0] == displayExOh[2] &&
         displayExOh[0] != '') {
-      finish=true;
+      if (filledBoxes == 9) {
+        winner = true;
+      }
       _showWinDialog(displayExOh[0]);
     }
 
@@ -150,7 +152,9 @@ class _HomePageState extends State<HomePage> {
     if (displayExOh[3] == displayExOh[4] &&
         displayExOh[3] == displayExOh[5] &&
         displayExOh[3] != '') {
-      finish=true;
+      if (filledBoxes == 9) {
+        winner = true;
+      }
       _showWinDialog(displayExOh[3]);
     }
 
@@ -158,7 +162,9 @@ class _HomePageState extends State<HomePage> {
     if (displayExOh[6] == displayExOh[7] &&
         displayExOh[6] == displayExOh[8] &&
         displayExOh[6] != '') {
-      finish=true;
+      if (filledBoxes == 9) {
+        winner = true;
+      }
       _showWinDialog(displayExOh[6]);
     }
 
@@ -166,7 +172,9 @@ class _HomePageState extends State<HomePage> {
     if (displayExOh[0] == displayExOh[3] &&
         displayExOh[0] == displayExOh[6] &&
         displayExOh[0] != '') {
-      finish=true;
+      if (filledBoxes == 9) {
+        winner = true;
+      }
       _showWinDialog(displayExOh[0]);
     }
 
@@ -174,7 +182,9 @@ class _HomePageState extends State<HomePage> {
     if (displayExOh[1] == displayExOh[4] &&
         displayExOh[1] == displayExOh[7] &&
         displayExOh[1] != '') {
-      finish=true;
+      if (filledBoxes == 9) {
+        winner = true;
+      }
       _showWinDialog(displayExOh[1]);
     }
 
@@ -182,7 +192,9 @@ class _HomePageState extends State<HomePage> {
     if (displayExOh[2] == displayExOh[5] &&
         displayExOh[2] == displayExOh[8] &&
         displayExOh[2] != '') {
-      finish=true;
+      if (filledBoxes == 9) {
+        winner = true;
+      }
       _showWinDialog(displayExOh[2]);
     }
 
@@ -190,7 +202,9 @@ class _HomePageState extends State<HomePage> {
     if (displayExOh[0] == displayExOh[4] &&
         displayExOh[0] == displayExOh[8] &&
         displayExOh[0] != '') {
-      finish=true;
+      if (filledBoxes == 9) {
+        winner = true;
+      }
       _showWinDialog(displayExOh[0]);
     }
 
@@ -198,14 +212,15 @@ class _HomePageState extends State<HomePage> {
     if (displayExOh[2] == displayExOh[4] &&
         displayExOh[2] == displayExOh[6] &&
         displayExOh[2] != '') {
-      finish=true;
+      if (filledBoxes == 9) {
+        winner = true;
+      }
       _showWinDialog(displayExOh[2]);
     }
 
-    else if(filledBoxes==9&&finish==false){
+    if (winner == false && filledBoxes == 9) {
       _showDrawDialog();
     }
-
   }
 
   void _showWinDialog(String winner) {
@@ -261,12 +276,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _clearBoard(){
+  void _clearBoard() {
     setState(() {
-      for(int i=0;i<9;i++){
-        displayExOh[i]='';
+      for (int i = 0; i < 9; i++) {
+        displayExOh[i] = '';
       }
     });
-    filledBoxes=0;
+    filledBoxes = 0;
+    winner = false;
   }
 }
