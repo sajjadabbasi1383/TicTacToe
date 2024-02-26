@@ -60,9 +60,9 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Center(
                 child: Text(
-                  //displayExOh[index],
-                  index.toString(),
-                  style: const TextStyle(color: Colors.white, fontSize: 40),
+                  displayExOh[index],
+                  //index.toString(),
+                  style: const TextStyle(color: Colors.white, fontSize: 50),
                 ),
               ),
             ),
@@ -75,9 +75,9 @@ class _HomePageState extends State<HomePage> {
   void _tapped(int index) {
     setState(() {
       if (ohTurn) {
-        displayExOh[index] = 'O';
+        displayExOh[index] = 'o';
       } else {
-        displayExOh[index] = 'X';
+        displayExOh[index] = 'x';
       }
       ohTurn = !ohTurn;
       _checkWinner();
@@ -89,58 +89,64 @@ class _HomePageState extends State<HomePage> {
     if (displayExOh[0] == displayExOh[1] &&
         displayExOh[0] == displayExOh[2] &&
         displayExOh[0] != '') {
-      _showDialog();
+      _showDialog(displayExOh[0]);
     }
 
     //check 2st row
     if (displayExOh[3] == displayExOh[4] &&
         displayExOh[3] == displayExOh[5] &&
         displayExOh[3] != '') {
-      _showDialog();
+      _showDialog(displayExOh[3]);
     }
 
     //check 3st row
     if (displayExOh[6] == displayExOh[7] &&
         displayExOh[6] == displayExOh[8] &&
         displayExOh[6] != '') {
-      _showDialog();
+      _showDialog(displayExOh[6]);
     }
 
     //check 1st column
     if (displayExOh[0] == displayExOh[3] &&
         displayExOh[0] == displayExOh[6] &&
         displayExOh[0] != '') {
-      _showDialog();
+      _showDialog(displayExOh[0]);
     }
 
     //check 2st column
     if (displayExOh[1] == displayExOh[4] &&
         displayExOh[1] == displayExOh[7] &&
         displayExOh[1] != '') {
-      _showDialog();
+      _showDialog(displayExOh[1]);
     }
 
     //check 3st column
     if (displayExOh[2] == displayExOh[5] &&
         displayExOh[2] == displayExOh[8] &&
         displayExOh[2] != '') {
-      _showDialog();
+      _showDialog(displayExOh[2]);
     }
 
     //check diagonal
     if (displayExOh[0] == displayExOh[4] &&
         displayExOh[0] == displayExOh[8] &&
         displayExOh[0] != '') {
-      _showDialog();
+      _showDialog(displayExOh[0]);
     }
 
     //check diagonal
     if (displayExOh[2] == displayExOh[4] &&
         displayExOh[2] == displayExOh[6] &&
         displayExOh[2] != '') {
-      _showDialog();
+      _showDialog(displayExOh[2]);
     }
   }
 
-  void _showDialog() {}
+  void _showDialog(String winner) {
+    showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        title: Text('Winner is : $winner'),
+      );
+    },);
+  }
 }
