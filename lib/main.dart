@@ -6,6 +6,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,8 +24,40 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  String displayExOh='';
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold());
+    return SafeArea(
+        child: Scaffold(
+      backgroundColor: Colors.grey[800],
+      body: GridView.builder(
+        itemCount: 9,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+        ),
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: _tapped,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey[700]!,width: 2),
+              ),
+              child: Center(
+                child: Text(displayExOh,style: const TextStyle(color: Colors.white,fontSize: 40),),
+              ),
+            ),
+          );
+        },
+      ),
+    ));
   }
+
+  void _tapped(){
+    setState(() {
+      displayExOh='O';
+    });
+  }
+
 }
