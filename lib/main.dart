@@ -24,8 +24,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  List<String> displayExOh=['','','','','','','','','',];
+  bool ohTurn = true;
+  List<String> displayExOh = [
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +54,16 @@ class _HomePageState extends State<HomePage> {
             },
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey[700]!,width: 2),
+                border: Border.all(
+                  color: Colors.grey[700]!,
+                ),
               ),
               child: Center(
-                child: Text(displayExOh[index],style: const TextStyle(color: Colors.white,fontSize: 40),),
+                child: Text(
+                  //displayExOh[index],
+                  index.toString(),
+                  style: const TextStyle(color: Colors.white, fontSize: 40),
+                ),
               ),
             ),
           );
@@ -56,10 +72,75 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
-  void _tapped(int index){
+  void _tapped(int index) {
     setState(() {
-      displayExOh[index]='O';
+      if (ohTurn) {
+        displayExOh[index] = 'O';
+      } else {
+        displayExOh[index] = 'X';
+      }
+      ohTurn = !ohTurn;
+      _checkWinner();
     });
   }
 
+  void _checkWinner() {
+    //check 1st row
+    if (displayExOh[0] == displayExOh[1] &&
+        displayExOh[0] == displayExOh[2] &&
+        displayExOh[0] != '') {
+      _showDialog();
+    }
+
+    //check 2st row
+    if (displayExOh[3] == displayExOh[4] &&
+        displayExOh[3] == displayExOh[5] &&
+        displayExOh[3] != '') {
+      _showDialog();
+    }
+
+    //check 3st row
+    if (displayExOh[6] == displayExOh[7] &&
+        displayExOh[6] == displayExOh[8] &&
+        displayExOh[6] != '') {
+      _showDialog();
+    }
+
+    //check 1st column
+    if (displayExOh[0] == displayExOh[3] &&
+        displayExOh[0] == displayExOh[6] &&
+        displayExOh[0] != '') {
+      _showDialog();
+    }
+
+    //check 2st column
+    if (displayExOh[1] == displayExOh[4] &&
+        displayExOh[1] == displayExOh[7] &&
+        displayExOh[1] != '') {
+      _showDialog();
+    }
+
+    //check 3st column
+    if (displayExOh[2] == displayExOh[5] &&
+        displayExOh[2] == displayExOh[8] &&
+        displayExOh[2] != '') {
+      _showDialog();
+    }
+
+    //check diagonal
+    if (displayExOh[0] == displayExOh[4] &&
+        displayExOh[0] == displayExOh[8] &&
+        displayExOh[0] != '') {
+      _showDialog();
+    }
+
+    //check diagonal
+    if (displayExOh[2] == displayExOh[4] &&
+        displayExOh[2] == displayExOh[6] &&
+        displayExOh[2] != '') {
+      _showDialog();
+    }
+  }
+
+  void _showDialog() {}
 }
