@@ -78,7 +78,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   maxRadius: 80,
                   backgroundColor: Colors.grey[900],
                   child: Image.asset(
-                    'assets/logo.png',
+                    'assets/images/logo.png',
                     color: Colors.white,
                     fit: BoxFit.scaleDown,
                   ),
