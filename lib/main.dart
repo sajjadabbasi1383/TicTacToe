@@ -50,36 +50,37 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Colors.grey[800],
-      body: Column(
-        children: [
-          Expanded(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Player O",
-                    style: myTextStyle,
-                  ),
-                  Text(
-                    ohScore.toString(),
-                    style: myTextStyle,
-                  ),
-                ],
+      backgroundColor: Colors.grey[900],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Expanded(
+                child: Padding(
+              padding: EdgeInsets.only(top: 100),
+              child: Text(
+                "TIC TAC TOE",
+                style: myTextStyle3,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Player X",
-                    style: myTextStyle,
-                  ),
-                  Text(
-                    exScore.toString(),
-                    style: myTextStyle,
+            )),
+            Expanded(
+                child: AvatarGlow(
+              duration: const Duration(seconds: 3),
+              glowColor: Colors.white,
+              repeat: true,
+              startDelay: const Duration(seconds: 1),
+              glowRadiusFactor: 0.3,
+              child: Container(
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: CircleAvatar(
+                  maxRadius: 80,
+                  backgroundColor: Colors.grey[900],
+                  child: Image.asset(
+                    'assets/logo.png',
+                    color: Colors.white,
+                    fit: BoxFit.scaleDown,
                   ),
                 ],
               ),
