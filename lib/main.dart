@@ -82,36 +82,36 @@ class _IntroScreenState extends State<IntroScreen> {
                     color: Colors.white,
                     fit: BoxFit.scaleDown,
                   ),
-                ],
-              ),
-            ],
-          )),
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                itemCount: 9,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
                 ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      _tapped(index);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey[700]!,
+              ),
+            )),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text("@CREATEDBYSAJJAD", style: myTextStyle),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => const HomePage(),
+                            ));
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(30),
+                        margin: const EdgeInsets.fromLTRB(30, 20, 30, 40),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          displayExOh[index],
-                          //index.toString(),
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 50),
+                        child: const Center(
+                          child: Text(
+                            "PLAY GAME",
+                            style: myTextStyle2,
+                          ),
                         ),
                       ),
                     ),
